@@ -77,6 +77,7 @@
 		function logger($message)
 		{
 			$requester=$_SERVER['REMOTE_ADDR'];
+
 			$log = new Logging();
 			$log->logfile('./'.$this->aps->id.'.log');
 			$log->logwrite($requester.":".$message);
