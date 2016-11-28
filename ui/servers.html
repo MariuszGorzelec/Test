@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="pl"'>
+<head>
+	<meta charset="utf-8">
+	<script src="/aps/2/ui/runtime/client/aps/aps.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script>
+		require
+		(
+			[
+				"dojo/parser",
+				"aps/CheckBox",
+				
+				"aps/PageContainer",
+				"aps/Password",
+				"aps/RadioButton",
+				"aps/Tooltip",
+				"aps/Select",
+				
+				"aps/Grid",
+				"dojox/mvc/getStateful",
+				"aps/Memory",
+				"dojox/mvc/StatefulArray",
+				"aps/Message",
+				"dojox/mvc/getPlainValue",
+				"aps/xhr",
+				"dojo/when",
+				// "dijit/registry",
+				"aps/ResourceStore",
+				"aps/ready!"
+			],
+			function
+			(
+				parser,
+				CheckBox,
+				PageContainer,
+				Password,
+				RadioButton,
+				Tooltip,
+				Select,
+				Grid,
+				getStateful,
+				Memory,
+				getPlainValue,
+				StatefulArray,
+				Message,
+				xhr,
+				when,
+				// registry,
+				Store
+			)
+			{
+				"use strict";
+				
+				var store_certyfikat = new Store
+				(
+					{
+						apsType: "http://intertele.pl/Event/management/1.0",
+						target: "/aps/2/resources/"
+					}
+				);
+                
+				parser.parse().then
+				(
+					function()
+					{
+						console.log(store_certyfikat);
+						console.log(aps);
+						console.log(document);
+						console.log(window);
+
+						//model.packageId = identyfikator;
+						//model.packageName = registry.byId("Package_Name").get('value');
+						//model.packageDescription = registry.byId("Package_Description").get('value');
+						//console.log(model);
+
+						//when
+						//(
+							//store.put
+							//(
+							//		getPlainValue(model)
+							//),
+							//function()
+							//{
+							//	console.log('put');
+							//	aps.apsc.gotoView("packages");
+							//},
+							//function(error)
+							//{
+							//	console.log('error');
+							//	displayError(error);
+							//}
+						//);
+						
+						when
+						(
+							xhr
+							(
+								"/aps/2/resources/" + aps.context.vars.management.aps.id + "/Ustawianie",
+								{
+									method: "GET",
+									handleAs: "json"
+								}
+							),
+							function
+							(
+								data
+							)
+							{
+								console.log(data);
+								
+								when
+								(
+									xhr
+									(
+										"/aps/2/resources/" + aps.context.vars.management.aps.id,
+										{
+											method: "GET",
+											handleAs: "json"
+										}
+									),
+									function
+									(
+										data
+									)
+									{
+										console.log(data);
+										
+										console.log(data.user);
+
+										console.log(data.order_id);
+										
+										if (data.order_id === null)
+										{
+											data.order_id = 1;
+										}
+										else
+										{
+											data.order_id = data.order_id +1;
+										}
+										// var model;								
+										// model.order_id = 102;								
+										// console.log(model);
+
+										if (data.order_status === null)
+										{
+											data.order_status = 'Waiting';
+										}
+										else
+										{
+											data.order_status = data.order_status;
+										}
+										
+										//when
+										//(
+										//	store_certyfikat.put
+										//	(
+										//		(data)
+										//	),
+										//	function()
+										//	{
+										//		console.log('put');
+										//	},
+										//	function(error)
+										//	{
+										//		console.log('error');
+										//	}
+										//);						
+									},
+									function(err)
+									{
+										console.log(JSON.stringify(err));
+
+										document.body.style.cursor = 'default';
+									}
+								);
+							},
+							function(err)
+							{
+								console.log(JSON.stringify(err));
+
+								document.body.style.cursor = 'default';
+							}
+						);
+					}
+				);
+			}
+		);
+	</script>
+</head>
+<body>	
+	<div dojoType="aps/PageContainer" data-dojo-props="id: 'HomeBiuro_PageContainer'">
+		
+		<div id="Home_Biuro_001">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Insert_Container', cols: 2, visible: true">
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Insert_Container_01', cols: 0">
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'FieldSet_001', title: 'Szczeg&#243;&#322;y konta'">
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Nazwa_Firmy', size: 30, label: 'Nazwa firmy', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_NIP', size: 30, label: 'NIP', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Ulica', size: 30, label: 'Ulica', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Numer_Budynku', size: 30, label: 'Numer budynku', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Numer_Lokalu', size: 30, label: 'Numer lokalu'">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Kod_Pocztowy', size: 30, label: 'Kod pocztowy', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Miasto', size: 30, label: 'Miejscowoś&#263;', required: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Account_No',label: 'Numer konta bankowego', visible: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Bank_Name', label: 'Nazwa banku', visible: true">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Telefon', size: 30, label: 'Telefon'">
+						</div>
+					</div>
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+					</div>
+				</div>
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Insert_Container_02', cols: 0">
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Usługa'">
+						<div data-dojo-type="aps/Output" data-dojo-props="id: 'Insert_Odin_Sub_ID', label: 'Subskrypcja: ID', visible: true">					
+						</div>
+						<div data-dojo-type="aps/Output" data-dojo-props="id: 'Insert_Odin_Sub_Name', label: 'Nazwa usługi', visible: true">
+						</div>					
+						<div data-dojo-type="aps/Output" data-dojo-props="id: 'Insert_Odin_Ser_Template_ID', label: 'Typ usługi: ID', visible: false">					
+						</div>
+						<div data-dojo-type="aps/Output" data-dojo-props="id: 'Insert_Odin_Ser_Template_Name', label: 'Typ usługi', visible: false">
+						</div>
+					</div>
+					<br />
+					<br />					
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'U&#380;ytkownik'">
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Uzytkownik_Imie', size: 30, label: 'Imi&#281;'">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Uzytkownik_Nazwisko', size: 30, label: 'Nazwisko'">
+						</div>
+						<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Insert_Uzytkownik_e_Mail', size: 30, label: 'Login (e-Mail)', required: true">
+						</div>
+						<div data-dojo-type="aps/Password" data-dojo-props="id: 'Insert_Uzytkownik_Haslo', size: 30, label: 'Has&#322;o', required: true, showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false">
+						</div>							
+					</div>
+				</div>
+			</div>
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Insert_Save_Container', cols: 0, visible: false">
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Insert_Save', label: 'Aktywacja', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+			</div>
+		</div>
+			
+		<div id="Home_Biuro_002">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Upgrade_Wybor_000', cols: 2, visible: true">
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Upgrade_Wybor_000_left', cols: 0, visible: true">
+					<div data-dojo-type="aps/Button" data-dojo-props="id: 'Go_To_Favato_Button', label: 'Zaloguj do aplikacji', visible: true, autoBusy: false">
+					</div>
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+					</div>
+				</div>
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Upgrade_Wybor_000_Right', cols: 0, visible: true">
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Upgrade_Wybor', cols: 0">
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Renew', label: 'Odnów subskrypcję', disabled: false, autoBusy: false, visible: true">
+						</div>
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Period', label: 'Przełącz okres', disabled: false, autoBusy: false, visible: true">
+						</div>
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan', label: 'Przełącz plan', disabled: false, autoBusy: false, visible: true">
+						</div>
+					</div>
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: true">
+					</div>
+				</div>
+			</div>
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Users_Container', cols: 0, visible: false">
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Users_Container_01', cols: 2, visible: true">
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Users_Container_01_1', cols: 0">
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'Select_Client', title: 'Szczeg&#243;&#322;y konta'">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_ID', label: 'ID', visible: false">
+							</div>						
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_First_Login', label: 'First login', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Status', label: 'Status', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Last_Login', label: 'Last login', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Data_Completed', label: 'Data completed', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_CompanyName', label: 'Nazwa firmy', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Phone', label: 'Telefon kontaktowy', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Account_No', label: 'Numer konta bankowego', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Bank_Name', label: 'Nazwa banku', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Seller', label: 'Seller', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_NIP', label: 'NIP', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Account_Registered', label: 'Data rejestracji/aktywacji', visible: true">
+							</div>
+						</div>
+
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'Select_Client_Addr', title: 'Adres'">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Address_Street', label: 'Ulica', visible: true">					
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Address_House', label: 'Numer domu', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Address_Flat', label: 'Numer lokalu', visible: true">
+							</div>							
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Address_Postal_Code', label: 'Kod pocztowy', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Address_Town', label: 'Miejscowoś&#263;', visible: true">
+							</div>
+						</div>
+            
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+						</div>
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'apsButton_01', label: 'Edit', disabled: true, autoBusy: false, visible: false">
+						</div>						
+						
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'Select_Quantities', visible: false, title: 'Quantities'">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Quantities_VAT', label: 'VAT', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Quantities_Memo', label: 'Memo', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Quantities_Proforma', label: 'Proforma', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Quantities_Margin', label: 'Margin', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Quantities_Advance', label: 'Advance', visible: false">
+							</div>
+						</div>
+            
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+						</div>
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'apsButton_02', label: 'Edit', visible: false, disabled: true, autoBusy: false">
+						</div>                    						
+					</div>
+
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Users_Container_01_2', cols: 0">
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'Select_Subscription', title: 'Usługa'">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Packets_ID', label: 'ID', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Subscription_start', label: 'Data rozpocz&#281;cia substrykcji', visible: true">				
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Subscription_stop', label: 'Data zako&#324;czenia subskrypcji', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Subscription_ID', label: 'Subskrypcja: ID', visible: true">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Subscription_Name', label: 'Nazwa usługi', visible: true">
+							</div>																			
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Service_Template_ID', label: 'Typ usługi: ID', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Service_Template_Name', label: 'Typ usługi', visible: false">
+							</div>							
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Service_Subscription_status', label: 'Status 01', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Odin_Service_Subscription_Status_Service', label: 'Status 02', visible: false">
+							</div>							
+						</div>
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="visible: false">
+						</div>
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: true">
+						</div>
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="id: 'Select_Client_Alt_Addr', visible: false, title: 'Alt Address'">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Alt_Address_Street', label: 'Street', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Alt_Address_House', label: 'House', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Alt_Address_Flat', label: 'Flat', visible: false">
+							</div>							
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Alt_Address_Postal_Code', label: 'Postal Code', visible: false">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Select_Client_Alt_Address_Town', label: 'Flat', visible: false">
+							</div>
+						</div>
+
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+						</div>
+						<div data-dojo-type="aps/Button" data-dojo-props="id: 'apsButton_03', label: 'Edit', visible: false, disabled: true, autoBusy: false">
+						</div>
+					</div>
+				</div>				
+
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Go_To_Favato_Container', visible: true">
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: true">
+					</div>
+				</div>
+				<br />
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Users_Grid_Container', title: 'Użytkownicy', visible: true">
+					<div data-dojo-type="aps/Grid" data-dojo-props="id: 'DeclarativeSingle', selectionMode: 'single', numberOfItemPerPageText: 'Number of displayed items:', searchButtonText: 'Find', resetSearchButtonText: 'Reset', recordsTotalText: 'item(s) displayed', visible: false">
+						<div data-dojo-type="aps/Toolbar" data-dojo-props="visible: true">
+							<div data-dojo-type="aps/ToolbarButton" data-dojo-props="id: 'Grid_Przycisk_Add', iconClass: 'sb-export', requireSingleItem: false, label: 'Dodaj', visible: true, autoBusy: false">
+							</div>	
+							<div data-dojo-type="aps/ToolbarButton" data-dojo-props="id: 'Grid_Przycisk_Edit', iconClass: 'sb-export', requireSingleItem: true, label: 'Edytuj', visible: true, autoBusy: false">
+							</div>							
+							<div data-dojo-type="aps/ToolbarButton" data-dojo-props="id: 'Grid_Przycisk_Delete', iconClass: 'sb-export', requireSingleItem: true, label: 'Usuń', visible: true, autoBusy: false">
+							</div>							
+							<div data-dojo-type="aps/ToolbarButton" data-dojo-props="id: 'Grid_Przycisk_Change_Password', iconClass: 'sb-export', requireSingleItem: true, label: 'Zmień hasło', visible: true, autoBusy: false">
+							</div>							
+							<div data-dojo-type="aps/ToolbarButton" data-dojo-props="id: 'Grid_Przycisk_Zaloguj_do_Aplikacji', iconClass: 'sb-export', requireSingleItem: true, label: 'Zaloguj do aplikacji', visible: false, autoBusy: false">
+							</div>							
+						</div>
+	
+						<table>
+							<tr>
+								<th data-dgrid-column="{'field': 'email', 'label': 'Login' }">
+								</th>												
+								<th data-dgrid-column="{'field': 'perm', 'label': 'Uprawnienia' }">
+								</th>
+								<th data-dgrid-column="{'field': 'first_name', 'label': 'Imi&#281;' }">
+								</th>
+								<th data-dgrid-column="{'field': 'last_name', 'label': 'Nazwisko' }">
+								</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>	
+			
+		<div id="Home_Biuro_003">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'User_Add_Container', cols: 0, visible: true">
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Uzytkownik - Dodaj'">
+					<div data-dojo-type="aps/Output" data-dojo-props="id: 'Add_Uzytkownik_First_Login', size: 30, label: 'Nazwa usługi'">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_Uzytkownik_e_Mail', size: 30, label: 'Login (e-Mail)', required: true">
+					</div>
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Add_Uzytkownik_Password', label: 'Hasło użytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true">
+					</div>
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Add_Uzytkownik_Password_Bis',label: 'Potwierdz hasło uzytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_Uzytkownik_FirstName', size: 30, label: 'Imie'">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_Uzytkownik_LastName', size: 30, label: 'Nazwisko'">
+					</div>
+					
+					<select data-dojo-type="aps/Select" class="apsSelect" data-dojo-props="id: 'html_add_select1', title: 'Uprawnienia'">
+						<option value="admin">
+							Administrator
+						</option>
+						<option value="user" selected="selected">
+							Użytkownik
+						</option>
+					</select>
+					
+					<div data-dojo-type="aps/CheckBox" data-dojo-props="value: 'helloHTML', id: 'Logowanie_Odin', checked: false, visible: false, label: 'Logowanie do ODIN-a'">
+					</div>
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'System info', visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Login', size: 30, label: 'Login', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Password', label: 'Haslo uzytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Password_Bis',label: 'Potwierdz haslo uzytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true, visible: false">
+					</div>					
+					<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Personal info', visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_FirstName', size: 30, label: 'Imie', visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_MiddleName', size: 30, label: 'Imie', visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_LastName', size: 30, label: 'Nazwisko', visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_e_Mail', size: 30, label: 'e-Mail', required: true, visible: false">
+					</div>
+					
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Country', size: 30, label: 'Country', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_State', size: 30, label: 'State', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_ZipPostal', size: 30, label: 'Zip Postal', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_City', size: 30, label: 'City', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Address_Line_01', size: 30, label: 'Adres linia 01', required: true, visible: false">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Add_ODIN_Uzytkownik_Address_Line_02', size: 30, label: 'Adres linia 02', required: true, visible: false">
+					</div>
+				</div>
+				
+					<div data-dojo-type="aps/Tooltip" data-dojo-props='id: "ToolTip_001", connectId: ["html_add_select1"], position:["below"]'>
+						typy uprawnień:<br>
+						<i>administrator</i> - posiada uprawnienia do edycji i podglądu<br>
+						<i>użytkownik</i> - posiada uprawnienia d jedynie do podglądu
+					</div>
+				
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Add_Save', label: 'Zapisz', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Add_Cancel', label: 'Powrot', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+			</div>
+		</div>	
+
+			
+			
+		<div id="Home_Biuro_004">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'User_Edit_Container', cols: 0, visible: true">
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Uzytkownik - Edytuj'">
+					<div data-dojo-type="aps/Output" data-dojo-props="id: 'Edit_Uzytkownik_Id', size: 30, label: 'ID'">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Edit_Uzytkownik_e_Mail', size: 30, label: 'Login (e-Mail)', required: true">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Edit_Uzytkownik_Imie', size: 30, label: 'Imie'">
+					</div>
+					<div data-dojo-type="aps/TextBox" data-dojo-props="id: 'Edit_Uzytkownik_Nazwisko', size: 30, label: 'Nazwisko'">
+					</div>
+					<select data-dojo-type="aps/Select" id="html_add_select2" class="apsSelect" data-dojo-props="title: 'Uprawnienia'">
+						<option value="admin">
+							Administrator
+						</option>
+						<option value="user" selected="selected">
+							Użytkownik
+						</option>
+					</select>						
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Edit_Save', label: 'Zapisz', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Edit_Cancel', label: 'Powrot', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>				
+			</div>
+		</div>					
+
+		<div id="Home_Biuro_005">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Change_Password_Container', cols: 0, visible: true">
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Uzytkownik - Change password'">
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Change_Password_Nowe_Haslo', label: 'Nowe has&#322;o u&#380;ytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true">
+					</div>
+					<div data-dojo-type="aps/Password" data-dojo-props="id: 'Change_Password_Nowe_Haslo_Bis', label: 'Potwierd&#378; nowe has&#322;o u&#380;ytkownika', showShowPasswordButton: false, showResetButton: false, showStrengthIndicator: false, required: true">
+					</div>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Change_Password_Save', label: 'Zapisz', autoBusy: false">			
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Change_Password_Cancel', label: 'Powr&#243;t', autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+			</div>
+		</div>
+			
+		<div id="Home_Biuro_006">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Upgrade_Container_001', cols: 0, visible: true">				
+				<br />				
+				<br />
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+					<div data-dojo-type="aps/Output" data-dojo-props="id: 'Favato_Upgrade_Uzytkownik_First_Login', size: 30, label: 'Nazwa usługi'">
+					</div>
+					<div data-dojo-type="aps/Output" data-dojo-props="id: 'Favato_Upgrade_Uzytkownik_Template', size: 30, label: 'Typ usługi'">
+					</div>
+				</div>
+				<br />
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Wybierz plan odpowiadający Twoim potrzebom!'">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Upgrade_Cancel', label: 'Powr&#243;t', autoBusy: false">				
+				</div>
+			</div>
+		</div>
+		
+		<div id="Home_Biuro_008">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Renew_Container', cols: 0, visible: false, title: 'Odnów subskrypcję'">			
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Renew_Container_001', cols: 2, visible: true">				
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Renew_Container_001_Left', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Renew_Subscription_Start', size: 30, label: 'Początek okresu'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Renew_Subscription_End', size: 30, label: 'Koniec okresu'">
+							</div>
+						</div>
+					</div>
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Renew_Container_001_Right', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Renew_Subscription_Period_Unit', size: 30, label: 'Okres (jednostka)'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Renew_Subscription_Period_Type', size: 30, label: 'Okres (rodzaj)'">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Renew_From_Start_01', description: 'From the Start Date of Current Subscription ', checked: false, visible: false">
+				</div>					
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Renew_From_Now_01', description: 'From the Date of Upgrade ', checked: true, visible: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Choose Subscription Period', visible: true">
+				</div>
+				<div data-dojo-type="aps/Grid" data-dojo-props="id: 'Subscription_Renew_Grid', selectionMode: 'single', numberOfItemPerPageText: 'Number of displayed items:', searchButtonText: 'Find', resetSearchButtonText: 'Reset', recordsTotalText: 'item(s) displayed', visible: false">
+					<table>
+						<tr>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_01', 
+									'label': 'PlanPeriodID',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_02', 
+									'label': 'Period',
+									visible: true 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_03', 
+									'label': 'PeriodType',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_04', 
+									'label': 'Trial',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_05', 
+									'label': 'SetupFee',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_06', 
+									'label': 'Subscription Fee',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_07', 
+									'label': 'Renewal Fee',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_08', 
+									'label': 'TransferFee',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_09', 
+									'label': 'NonRefundableAmount',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_10', 
+									'label': 'RefundPeriod',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_11', 
+									'label': 'Enabled',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_12', 
+									'label': 'NumberOfPeriods',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_13', 
+									'label': 'FeeText',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_14', 
+									'label': 'SortNumber',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_15', 
+									'label': 'IsOTFI',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_16', 
+									'label': 'DepositFee',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_17', 
+									'label': 'DepositDescr',
+									visible: false
+								}">
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Renew_Container_Przycisk_Anuluj', label: 'Anuluj', visible: true, autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Renew_Container_Przycisk_Zatwierdz', label: 'Zatwierdź', visible: true, autoBusy: false">
+				</div>				
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+			</div>
+		</div>
+
+		<div id="Home_Biuro_009">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Period_Container', title: 'Przełącz okres - Krok 1 z 2 - Wybierz okres', visible: true">
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Period_Container_001', cols: 2, visible: true">				
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Period_Container_001_Left', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Period_Subscription_Start', size: 30, label: 'Początek okresu'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Period_Subscription_End', size: 30, label: 'Koniec okresu'">
+							</div>
+						</div>
+					</div>
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Period_Container_001_Right', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Period_Subscription_Period_Unit', size: 30, label: 'Okres (jednostka)'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Period_Subscription_Period_Type', size: 30, label: 'Okres (rodzaj)'">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Switch Plan Option', visible: true">
+				</div>
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Switch_Period_From_Start_02', description: 'From the Start Date of Current Subscription ', checked: true, visible: true">
+				</div>					
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Switch_Period_From_Now_02', description: 'From the Date of Upgrade ', checked: false, visible: true">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Subscription Periods', visible: true">
+				</div>
+				<div data-dojo-type="aps/Grid" data-dojo-props="id: 'Subscription_Switch_Period_Grid', selectionMode: 'single', numberOfItemPerPageText: 'Number of displayed items:', searchButtonText: 'Find', resetSearchButtonText: 'Reset', recordsTotalText: 'item(s) displayed', visible: false">
+					<table>
+						<tr>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_01', 
+									'label': 'PlanPeriodID',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_02', 
+									'label': 'Period',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_03', 
+									'label': 'Period Type',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_04', 
+									'label': 'Trial',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_05', 
+									'label': 'SetupFee',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_06', 
+									'label': 'Subscription Fee',
+									visible: true 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_07', 
+									'label': 'Renewal Fee',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_08', 
+									'label': 'TransferFee',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_09', 
+									'label': 'NonRefundableAmount',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_10', 
+									'label': 'RefundPeriod',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_11', 
+									'label': 'Enabled',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_12', 
+									'label': 'NumberOfPeriods',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_13', 
+									'label': 'FeeText',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_14', 
+									'label': 'SortNumber',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_15', 
+									'label': 'IsOTFI',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_16', 
+									'label': 'DepositFee',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_17', 
+									'label': 'DepositDescr',
+									visible: false
+								}">
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Period_Przycisk_Anuluj', label: 'Anuluj', visible: true, autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Period_Przycisk_Zatwierdz', label: 'Zatwierdz', visible: true, autoBusy: false">
+				</div>				
+			</div>
+		</div>
+		
+		<div id="Home_Biuro_011">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Plan_Plan_Container', title: 'Przełącz pakiet - Krok 1 z 3 - Wybierz pakiet', visible: false">
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Service Plans', visible: true">
+				</div>
+				<div data-dojo-type="aps/Grid" data-dojo-props="id: 'Subscription_Switch_Plan_Plan_Grid', selectionMode: 'single', numberOfItemPerPageText: 'Number of displayed items:', searchButtonText: 'Find', resetSearchButtonText: 'Reset', recordsTotalText: 'item(s) displayed', visible: false">
+					<table>
+						<tr>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_01', 
+									'label': 'PlanID',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_02', 
+									'label': 'Name',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_03',
+									'label': 'ShortDescription',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_04',
+									'label': 'LongDescription',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_05', 
+									'label': 'CategoryID',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_06', 
+									'label': 'ResourceCurrencyID',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_07', 
+									'label': 'GateName',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_08', 
+									'label': 'GroupID',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_09', 
+									'label': 'IsParentReq',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_10', 
+									'label': 'RecurringType',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_11', 
+									'label': 'BillingPeriodType',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_12', 
+									'label': 'BillingPeriodType',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_13', 
+									'label': 'Okres',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_14', 
+									'label': 'PlanPeriodID',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_15', 
+									'label': 'IsOTFI',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_16', 
+									'label': 'DocID',
+									visible: false 
+								}">
+							</th>
+						</tr>
+					</table>
+				</div>
+				
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan_Plan_Przycisk_Anuluj', label: 'Anuluj', visible: true, autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan_Plan_Przycisk_Dalej', label: 'Dalej', visible: true, autoBusy: false">
+				</div>				
+			</div>
+		</div>
+		
+		<div id="Home_Biuro_012">
+			<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Container', title: 'Przełącz pakiet - Krok 2 z 3 - Wybierz okres', visible: false">
+				<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Container_001', cols: 2, visible: true">				
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Container_001_Left', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Subscription_Start', size: 30, label: 'Początek okresu'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Subscription_End', size: 30, label: 'Koniec okresu'">
+							</div>
+						</div>
+					</div>
+					<div data-dojo-type="aps/Container" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Container_001_Right', cols: 0, visible: true">				
+						<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Subscription_Period_Unit', size: 30, label: 'Okres (jednostka)'">
+							</div>
+							<div data-dojo-type="aps/Output" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Subscription_Period_Type', size: 30, label: 'Okres (rodzaj)'">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Switch Plan Option', visible: true">
+				</div>				
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Switch_Period_From_Start_03', description: 'From the Start Date of Current Subscription ', checked: true, visible: true">
+				</div>					
+				<div data-dojo-type="aps/RadioButton" data-dojo-props="id: 'Subscription_Switch_Period_From_Now_03', description: 'From the Date of Upgrade ', checked: false, visible: true">
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true, visible: false">
+				</div>				
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: 'Subscription Periods', visible: true">
+				</div>
+				<div data-dojo-type="aps/Grid" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Grid', selectionMode: 'single', numberOfItemPerPageText: 'Number of displayed items:', searchButtonText: 'Find', resetSearchButtonText: 'Reset', recordsTotalText: 'item(s) displayed', visible: false">
+					<table>
+						<tr>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_01', 
+									'label': 'PlanPeriodID',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_02', 
+									'label': 'Period',
+									visible: true 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_03', 
+									'label': 'PeriodType',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_04', 
+									'label': 'Trial',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_05', 
+									'label': 'SetupFee',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_06', 
+									'label': 'SubscriptionFee',
+									visible: true 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_07', 
+									'label': 'RenewalFee',
+									visible: true
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_08', 
+									'label': 'TransferFee',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_09', 
+									'label': 'NonRefundableAmount',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_10', 
+									'label': 'RefundPeriod',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_11', 
+									'label': 'Enabled',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_12', 
+									'label': 'NumberOfPeriods',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_13', 
+									'label': 'FeeText',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_14', 
+									'label': 'SortNumber',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_15', 
+									'label': 'IsOTFI',
+									visible: false
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_16', 
+									'label': 'DepositFee',
+									visible: false 
+								}">
+							</th>
+							<th data-dgrid-column="
+								{
+									'field': 'pole_17', 
+									'label': 'DepositDescr',
+									visible: false
+								}">
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div data-dojo-type="aps/FieldSet" data-dojo-props="title: true">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Przycisk_Poprzedni', label: 'Poprzedni', visible: true, autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Przycisk_Anuluj', label: 'Anuluj', visible: true, autoBusy: false">
+				</div>
+				<div data-dojo-type="aps/Button" data-dojo-props="id: 'Subscription_Switch_Plan_Period_Przycisk_Zatwierdz', label: 'Zatwierdz', visible: true, autoBusy: false">
+				</div>				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

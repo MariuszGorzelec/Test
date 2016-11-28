@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<files xmlns="http://apstandard.com/ns/1" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#">
+    <file name="images/icon.png" size="2061" sha256="b64a677330f5d9766631228f4298c5a1c1648e040470e29021a6aab6ab2c7941"/>
+    <file name="images/screenshot.png" size="121152" sha256="dbfbfe8a32f8c7a98e9128733f11d366e9fe2a876bee900ddc6af0143339825c"/>
+    <file name="scripts/clouds.php" size="1674" sha256="a89c216b6de1fd93385b008a24a478bc1e271e45b1dfe69a0e7e4c61349bf91e"/>
+    <file name="scripts/config/addresses.json" size="739" sha256="9e1bcc82ca1b576a5aef93a7e63c795a45a59c1874ba0f5bb747e2172beef38f"/>
+    <file name="scripts/config/config.php" size="2937" sha256="38292fbb0f7c4f02f24b2e27b134271e8c2b92e533edd78330c1fe40e79c5497"/>
+    <file name="scripts/config/env.config" size="332" sha256="cb9c49b86e9451f2bafcfba2f5c9dd9f13483d7b15db1d85c5da0493437dfb16"/>
+    <file name="scripts/config/params.json" size="2281" sha256="d3d74b2c2716ae57fd686f700e6e993b4e060da7c181384d8c1e2ef2817880f2"/>
+    <file name="scripts/events.php" size="11052" sha256="b5b12e769bf3085cbc07f94c4cdea3527cd3887053d89915ddc7763b2cf3d021"/>
+    <file name="scripts/logger.php" size="2064" sha256="0d9205fff6174db22533abdd4b1d0b51ae187faaca59df010439d325dd98aab1"/>
+    <file name="scripts/management.php" size="3207" sha256="d28f7d0bfbfa71d44b2e2bb5e13bee8435536ef3c35e38ca49ed6a701f221da4"/>
+    <file name="ui/new_certyfikat.json" size="262" sha256="9febc3ad8f8b21c67549ac5988a80964ca7238e22781e74938cbed95448a6102"/>
+    <file name="ui/new_certyfikat_domeny.json" size="262" sha256="9febc3ad8f8b21c67549ac5988a80964ca7238e22781e74938cbed95448a6102"/>
+    <file name="ui/new_certyfikat_domeny_emaile.json" size="262" sha256="9febc3ad8f8b21c67549ac5988a80964ca7238e22781e74938cbed95448a6102"/>
+    <file name="ui/new_certyfikat_domeny_metody.json" size="262" sha256="9febc3ad8f8b21c67549ac5988a80964ca7238e22781e74938cbed95448a6102"/>
+    <file name="ui/servers.html" size="139492" sha256="2a4ec5854701e5fac009f49998a0a927322514bdc3c8642309777f7b610ad095"/>
+    <file name="schemas/clouds.schema.gen" size="480" sha256="9906ec2a1816348253070e30d296aab21b259e884d3b1c600bdc5b93f23d7c4f"/>
+    <file name="schemas/management.schema.gen" size="1681" sha256="4ed08e3df5687e3b7dce1664ea45bff31bc7d034908964f1fe43d32d89fa6604"/>
+    <file name="schemas/events.schema.gen" size="5296" sha256="243e8d77f8df1c6881808fb6aa2537f40b826bfcab6c925f10be64b8a8d5e018"/>
+    <file name="APP-META.xml" size="3135" sha256="1a6c1947885cf6817b6d0f175a37a2c5be8996d1fa2716953f3e9fe8e70b5f06"/>
+</files>

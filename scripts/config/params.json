@@ -1,0 +1,52 @@
+{
+"offersData":{
+            "silver":{
+                            "aps":{"type":"http://event-mgmt.demo.apsdemo.org/vpsclouds/offers/1.0"},
+                            "name":"Silver",
+                            "platform":{"arch": "x64",
+                                          "OS":{"name": "centos", "version": "6.3"}
+                                        },
+                            "hardware":{"memory": "234",
+                                         "diskspace": "769",
+                                         "CPU":{"number": "1"}
+                                        }
+                      },
+            "gold":{
+                            "aps":{ "type":"http://event-mgmt.demo.apsdemo.org/vpsclouds/offers/1.0" },
+                            "name":"Gold",
+                            "platform":{"arch":"x64",
+                                          "OS":{"name": "Windows", "version": "7"}
+                                        },
+                            "hardware":{"memory": "2340",
+                                         "diskspace": "7690",
+                                         "CPU":{"number": "2"}
+                                        }
+                      },
+            "platinum":{
+                            "aps":{"type":"http://event-mgmt.demo.apsdemo.org/vpsclouds/offers/1.0"},
+                            "name":"Platinum",
+                            "platform":{"arch": "x64",
+                                          "OS":{"name": "centos", "version": "6.3"}
+                                        },
+                            "hardware":{"memory": "2347",
+                                         "diskspace": "7697",
+                                         "CPU":{"number": "3"}
+                                        }
+                      }
+        },
+"instanceProperties":{
+						"apphost": "test.test.com",
+						"cloudadmin": "myadmin",
+						"cloudpass": "somepass"
+					},
+"vpsProto": {
+				"aps":{"type":"http://event-mgmt.demo.apsdemo.org/vpsclouds/vpses/1.0"},
+				"user":{"aps":{"id":""}},
+				"offer":{"aps":{"id":""}},
+				"name":"VPS",
+				"userName":"",
+				"platform":"",
+				"hardware":""
+			},
+"eventsProto": {"aps":{"type":"http://event-mgmt.demo.apsdemo.org/vpsclouds/events/1.0"}}
+}

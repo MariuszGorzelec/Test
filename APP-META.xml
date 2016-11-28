@@ -1,0 +1,80 @@
+<application packaged="2016-02-26T15:53:06" version="2.0" xmlns="http://aps-standard.org/ns/2">
+    <id>http://intertele.pl/Test</id>
+    <name>Test</name>
+    <version>1.0</version>
+    <release>35.1.8</release>
+    <homepage>http://intertele.pl/Test</homepage>
+    <vendor>
+        <name>Company, Inc</name>
+        <homepage>http://intertele.pl/Test</homepage>
+    	<icon path="images/icon.png"/>
+    </vendor>
+    <packager>
+        <name>Company, Inc</name>
+        <homepage>http://intertele.pl/Test</homepage>
+    	<icon path="images/icon.png"/>
+    	<uri>http://intertele.pl/Test</uri>
+    </packager>
+	<presentation>
+		<summary>Simplest basic multi-tenant application</summary>
+		<description>This is a demo application to demonstrate how to develop APS apps step by step - This is a demo application to demonstrate how to develop APS apps step by step - This is a demo application to demonstrate how to develop APS apps step by step - This is a demo application to demonstrate how to develop APS apps step by step</description>
+		<icon path="images/icon.png"/>
+		
+		<screenshot path="images/screenshot.png">
+        	<description>erttqteqwrt</description>
+        </screenshot>        
+		<changelog>
+			<version version="1.0" release="35.1.8">
+				<entry>Initial release.</entry>
+			</version>
+		</changelog>
+		<categories>
+			<category>Samples</category>
+		</categories>
+
+		<navigation id="ccp" label="Test">
+        	<var name="management" type-id="http://intertele.pl/Test/management/1.0"/>
+        	<plugs-to id="http://www.aps-standard.org/ui/service"/>
+        	<item id="servers" label="Servers">
+        		<view id="servers" label="Servers">
+        		</view>
+        	</item>
+        </navigation>
+	</presentation>
+    <license-agreement>
+        <free/>
+        <text>
+            <name>End-User License Agreement</name>
+            <url>http://opensource.org/licenses/bsd-license</url>
+        </text>
+    </license-agreement>
+	<upgrade match="version=ge=1.0, release=ge=0"/>
+    <service id="clouds">
+		<schema path="schemas/clouds.schema.gen"/>
+		<code engine="php" path="scripts/clouds.php"/>
+		<presentation>
+			<name>Test Globals</name>
+			<summary>Test global service</summary>
+			<infolinks>
+            	<link class="deployment-guide" href="http://intertele.pl/Test">Demo project description</link>
+            	<link class="support" href="www.onet.pl">lerlertl</link>
+            </infolinks>
+		</presentation>
+    </service>
+    <service id="management">
+		<schema path="schemas/management.schema.gen"/>
+		<code engine="php" path="scripts/management.php"/>
+		<presentation>
+			<name>Test Management</name>
+			<summary>Test management service</summary>
+		</presentation>
+    </service>
+    <service id="events">
+        <schema path="schemas/events.schema.gen"/>
+		<code engine="php" path="scripts/events.php"/>
+        <presentation>
+             <name>Test Processing</name>
+             <summary>Test Processing service</summary>
+        </presentation>
+    </service>
+</application>

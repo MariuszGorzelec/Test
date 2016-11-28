@@ -1,0 +1,16 @@
+{"us": 
+  [
+    {"address": {"street_name": "2345 Bascom Ave, apt. 4", "zipcode": "95008", "city": "Campbell", "country": "us", "state": "CA"},
+     "phone": {"country_code": "1", "area_code": "408", "phone_num": "4567891", "ext_num": ""}
+    },
+    {"address": {"street_name": "2823 81 St, apt. 2", "zipcode": "11372", "city": "Jackson Heights", "country": "us", "state": "NY"},
+     "phone": {"country_code": "1", "area_code": "408", "phone_num": "4567891", "ext_num": ""}
+    }
+  ],
+ "ru":
+  [
+    {"address": {"street_name": "Altufevskoe shosse, 44", "zipcode": "127566",  "city": "Moscow", "country": "ru", "state": "Moscow"},
+     "phone": {"country_code": "7", "area_code": "495", "phone_num": "4567891", "ext_num": ""}
+    }
+  ]
+}
